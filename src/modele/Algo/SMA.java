@@ -13,7 +13,8 @@ public class SMA {
 	}
 	
 	private float calculSlow(){
-		if(ring.slowSize()<= 20){
+		
+		if(ring.slowSize()< 20){
 			
 			for(float f : ring.getSlow()){
 				slowAverage+=f;
@@ -21,7 +22,8 @@ public class SMA {
 			slowAverage=slowAverage/ring.slowSize();
 		}
 		else{
-			slowAverage= slowAverage - (ring.getOldest()/20)+(ring.getCurrent()/20);
+			float old=slowAverage;
+			slowAverage= old - (ring.getOldest()/20)+(ring.getCurrent()/20);
 		}
 		return slowAverage;
 	}
@@ -35,7 +37,7 @@ public class SMA {
 	}
 
 	private float calculFast(){
-		if(ring.fastSize()<=5){
+		if(ring.fastSize()<5){
 
 			for(float i : ring.getFast()){
 				fastAverage+=i;
@@ -43,7 +45,8 @@ public class SMA {
 			fastAverage=fastAverage/ring.fastSize();
 		}
 		else{
-			fastAverage= fastAverage - (ring.getOldest()/5)+(ring.getCurrent()/5);
+			float old=slowAverage;
+			fastAverage= old - (ring.getOldest()/5)+(ring.getCurrent()/5);
 		}
 		return fastAverage;
 	}

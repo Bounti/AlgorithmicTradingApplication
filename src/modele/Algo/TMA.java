@@ -18,32 +18,44 @@ public class TMA {
 	}
 	
 	private void calculSlow(float SMASlow){
-		slow.add(SMASlow);
-		if(slow.size()<=20){
+		if(slow.size()<20){
+			slow.add(SMASlow);
 			for(float i :slow){
 				slowAverage+=i;
 			}
-			slowAverage=slowAverage/ring.getTick();
+			slowAverage=slowAverage/slow.size();
 		}
 		else{
-			slowAverage= slowAverage - (slow.peek()/20)+(SMASlow/20);
-			
+			slow.add(SMASlow);
+			for(float i :slow){
+				slowAverage+=i;
+			}
+			slowAverage=slowAverage/slow.size();
+			//slowAverage= slowAverage - (slow.peek()/20)+(SMASlow/20);
+			//slow.add(SMASlow);
 		}
-		slow.add(SMASlow);
+		
 	}
 	
 	private void calculFast(float SMAFast){
-		fast.add(SMAFast);
-		if(slow.size()<=5){
-			for(float i :slow){
+		
+		if(fast.size()<5){
+			fast.add(SMAFast);
+			for(float i :fast){
 				fastAverage+=i;
 			}
-			fastAverage=fastAverage/ring.getTick();
+			fastAverage=fastAverage/fast.size();
 		}
 		else{
-			fastAverage= fastAverage - (fast.peek()/5)+(SMAFast/5);			
+			fast.add(SMAFast);
+			for(float i :fast){
+				fastAverage+=i;
+			}
+			fastAverage=fastAverage/fast.size();
+			//fastAverage= fastAverage - (fast.peek()/5)+(SMAFast/5);	
+			//fast.add(SMAFast);
 		}
-		fast.add(SMAFast);
+		
 	}
 	
 	public float getSlowAverage() {

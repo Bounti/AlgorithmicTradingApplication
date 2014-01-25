@@ -11,34 +11,39 @@ public class LWMA {
 	}
 	
 	private void  calculSlow(){
-		int i = 0;
-		if(ring.slowSize()<=20){
+		int i = 1,s=0;
+		
+		if(ring.slowSize()<20){
 			for(float f : ring.getSlow()){
 				slowAverage+=f*(i++);
+				s+=i;
 			}
-			slowAverage=slowAverage/ring.slowSize();
+			slowAverage=slowAverage/s;
 		}
 		else{
 			for(float f : ring.getSlow()){
 				slowAverage+=f*(i++);
+				s+=i;
 			}
-			slowAverage=slowAverage/20;
+			slowAverage=slowAverage/s;
 		}
 	}
 	
 	private void  calculFast(){
-		int i = 0;
-		if(ring.slowSize()<=5){
+		int i = 1,s=0;
+		if(ring.slowSize()<5){
 			for(float f : ring.getFast()){
 				fastAverage+=f*(i++);
+				s+=i;
 			}
-			fastAverage=fastAverage/ring.slowSize();
+			fastAverage=fastAverage/s;
 		}
 		else{
 			for(float f : ring.getFast()){
-				fastAverage+=f*(i+1);
+				fastAverage+=f*(i++);
+				s+=i;
 			}
-			fastAverage=fastAverage/5;
+			fastAverage=fastAverage/s;
 		}
 	}
 	
