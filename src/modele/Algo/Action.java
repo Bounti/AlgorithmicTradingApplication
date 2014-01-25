@@ -46,7 +46,11 @@ public class Action extends Thread {
 	public void update(Stock s){
 		this.tick=s.getTick();
 		currentPrice=s.getPrice();
-		this.oldestPrice=this.fast.element();
+		if(this.fast.isEmpty()){
+			this.oldestPrice=currentPrice;
+		}
+		else
+			this.oldestPrice=this.fast.element();
 		this.fast.add(currentPrice);
 		this.slow.add(currentPrice);
 	}
