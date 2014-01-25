@@ -40,7 +40,7 @@ public class NetworkService{
 		
 	}
 
-	public void refreshValue(String sValue) {
-		mf.addTableValue("0",sValue);
+	public void refreshValue(int tick,String sValue) {
+		mf.addTableValue(sValue,tick);
 	}
 }

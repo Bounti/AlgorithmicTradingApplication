@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 
 public class PriceNetworkService extends Thread{
 	
+	private static int tick = 0;
 	private Socket socket;
 	private int port = 3000;
 	private String address = "localhost";
@@ -49,7 +50,8 @@ public class PriceNetworkService extends Thread{
 				if( b[0] == '|')
 				{
 					System.out.println("[INFO]"+sValue);
-					netService.refreshValue(sValue);
+					netService.refreshValue(tick,sValue);
+					tick++;
 					sValue = "";
 				}
 				else

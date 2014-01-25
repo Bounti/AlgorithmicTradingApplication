@@ -1,18 +1,16 @@
-import java.io.IOException;
-import java.net.UnknownHostException;
-
-import Controler.NetworkService;
-
+import modele.Algo.*;
 
 public class Application {
 
 	public static void main(String[] argv ){
-		try {
-			NetworkService networkService = NetworkService.getInstance();
-			networkService.start();
+		/*
+		 * NetworkService networkService = NetworkService.getInstance(this);
+			networkService.initTransaction();
 		} catch (IOException e1) {
 			System.out.println("[Error]:"+e1.getMessage());
 		}
+		 */
 		
+			Action action = new Action();
 	}
 }
