@@ -11,29 +11,40 @@ import java.net.UnknownHostException;
 public class BookingNetworkService extends Thread{
 	
 	private Socket socket;
-	private int port = 3000;
+	private int port = 3001;
 	private String address = "localhost";
 	private boolean listening = true;
 	
 	private DataOutputStream out;
 	private DataInputStream in;
 
-	private byte[] buffer;
-	
-	public BookingNetworkService() throws UnknownHostException, IOException{
+	public void sendSellOrder() throws IOException {
+		System.out.println("=========SSS=============");
 		socket = new Socket(this.address,this.port);
 
 		out = new DataOutputStream(socket.getOutputStream());
 		in = new DataInputStream(socket.getInputStream());
 
-		buffer = new byte[4096];
-	}
-
-	public void sendSellOrder() throws IOException {
 		out.writeBytes("S\n");
+		String str = in.readLine();
+
+		System.out.println(str);
+		socket.close();
 	}
 
 	public void sendBuyOrder() throws IOException {
+		System.out.println("=====BBB=================");
+
+		socket = new Socket(this.address,this.port);
+
+		out = new DataOutputStream(socket.getOutputStream());
+		in = new DataInputStream(socket.getInputStream());
+
 		out.writeBytes("B\n");
+		String str = in.readLine();
+
+		System.out.println(str);
+
+		socket.close();
 	}
 }
