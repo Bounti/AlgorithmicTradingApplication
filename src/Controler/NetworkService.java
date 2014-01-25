@@ -36,7 +36,7 @@ public class NetworkService{
 		
 	}
 
-	public void refreshValue(int tick,String sValue) {
-		action.add(Float.valueOf(sValue));
+	public void refreshValue(int tick,float price) {
+		action.add(tick,price);
 	}
 }
