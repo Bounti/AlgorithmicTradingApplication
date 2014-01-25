@@ -1,29 +1,25 @@
 package Controler;
 
+import modele.Algo.Action;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.UnknownHostException;
-
-import View.MainFrame;
 
 public class NetworkService{
 
 	private static NetworkService instance = null;
 	
-	private boolean listening = true;
-	
 	private PriceNetworkService priceNetService;
 	private BookingNetworkService bookingNetService;
+	private Action action;
 	
-	private MainFrame mf = new MainFrame();
-	
-	public static NetworkService getInstance() throws UnknownHostException, IOException{
+	public static NetworkService getInstance(Action action) throws UnknownHostException, IOException{
 		if(instance == null)
-			instance = new NetworkService();
+			instance = new NetworkService(action);
 		return instance;
 	}
 	
-	private NetworkService() throws UnknownHostException, IOException{
+	private NetworkService(Action action) throws UnknownHostException, IOException{
+		this.action = action;
 		priceNetService = new PriceNetworkService(this);
 		bookingNetService = new BookingNetworkService();
 	}
@@ -41,6 +37,6 @@ public class NetworkService{
 	}
 
 	public void refreshValue(int tick,String sValue) {
-		mf.addTableValue(sValue,tick);
+		action.add(Float.valueOf(sValue));
 	}
 }
