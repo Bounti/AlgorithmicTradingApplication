@@ -1,20 +1,22 @@
 package modele.Algo;
 
+
 public class SMA {
-	public static Action ring;
-	public static float slowAverage;
-	public static float fastAverage;
+	private Action ring;
+	private float slowAverage;
+	private float fastAverage;
+	
 	public SMA(Action r){
 		ring=r;
 		slowAverage=0;
 		fastAverage=0;
 	}
 	
-	private static float calculSlow(){
-		if(ring.slowSize()<=20){
-			RingBuffer tab = ring.getSlow();
-			for(int i=0; i<ring.slowSize();i++){
-				slowAverage+=tab.get(i);
+	private float calculSlow(){
+		if(ring.slowSize()<= 20){
+			
+			for(float f : ring.getSlow()){
+				slowAverage+=f;
 			}
 			slowAverage=slowAverage/ring.slowSize();
 		}
@@ -24,11 +26,19 @@ public class SMA {
 		return slowAverage;
 	}
 	
-	private static float calculFast(){
+	public float getSlowAverage() {
+		return slowAverage;
+	}
+
+	public float getFastAverage() {
+		return fastAverage;
+	}
+
+	private float calculFast(){
 		if(ring.fastSize()<=5){
-			RingBuffer tab =ring.getFast();
-			for(int i=0; i<ring.fastSize();i++){
-				fastAverage+=tab.get(i);
+
+			for(float i : ring.getFast()){
+				fastAverage+=i;
 			}
 			fastAverage=fastAverage/ring.fastSize();
 		}
@@ -36,5 +46,10 @@ public class SMA {
 			fastAverage= fastAverage - (ring.getOldest()/5)+(ring.getCurrent()/5);
 		}
 		return fastAverage;
+	}
+	
+	public void calcul(){
+		this.calculFast();
+		this.calculSlow();
 	}
 }
