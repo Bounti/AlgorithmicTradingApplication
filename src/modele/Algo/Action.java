@@ -12,7 +12,7 @@ public class Action {
 		current=0;
 	}
 	
-	public void add(int i){
+	public void add(float i){
 		current=i;
 		this.oldest=this.fast.add(i);
 		this.slow.add(i);
