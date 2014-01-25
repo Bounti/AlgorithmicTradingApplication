@@ -12,5 +12,6 @@ public class Application {
 		 */
 		
 			Action action = new Action();
+			action.start();
 	}
 }

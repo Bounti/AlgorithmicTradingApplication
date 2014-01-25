@@ -112,7 +112,7 @@ public class Action extends Thread {
 							
 						}
 						else{
-							sma_ecart_old=average_old[1]-average_old[0];
+							/*sma_ecart_old=average_old[1]-average_old[0];
 							sma_ecart_current=average_current[1]-average_current[0];
 							tma_ecart_old=average_old[3]-average_old[2];
 							tma_ecart_current=average_current[3]-average_current[2];
@@ -149,7 +149,8 @@ public class Action extends Thread {
 							average_old[2]=average_current[2];
 							average_old[3]=average_current[3];
 							average_old[4]=average_current[4];
-							average_old[5]=average_current[5];
+							average_old[5]=average_current[5];*/
+							
 						}
 					}
 				}
