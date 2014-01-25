@@ -76,7 +76,7 @@ public class MainFrame extends JFrame{
 		this.priceTable.addRow(new Object[]{price,tick});
 	}
 
-	public void add(Line line, int price, int tick ){
+	public void add(Line line, float price, int tick ){
 		lines[line.getIndex()].addValue(price,line.getName(),String.valueOf(tick));
 	}
 }
