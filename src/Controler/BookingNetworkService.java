@@ -29,12 +29,11 @@ public class BookingNetworkService extends Thread{
 		buffer = new byte[4096];
 	}
 
-	public void run(){
-		String sValue = "";
-		byte[] b = new byte[1];
-		while(listening)
-		{
+	public void sendSellOrder() throws IOException {
+		out.writeBytes("S\n");
+	}
 
-		}
+	public void sendBuyOrder() throws IOException {
+		out.writeBytes("B\n");
 	}
 }

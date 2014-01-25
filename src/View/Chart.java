@@ -17,17 +17,19 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Chart extends JPanel {
 
 	private XYPlot plot;
-	private XYDataset[] datas = new XYDataset[9];
-	private Series[] series = new Series[9];
-	private RegularTimePeriod t = new Day();
+	private DefaultCategoryDataset[] datas = new DefaultCategoryDataset[9];
 	private final JFreeChart chart;
 	
 	public Chart(){
 		super(new BorderLayout());
+		
+		for(int i=0; i< datas.length ;i++)
+			datas[i] = new DefaultCategoryDataset();
 		
 		chart = ChartFactory.createTimeSeriesChart("---", "Time (s)", "Price ($)", null, true, true, false);
 		chart.setBackgroundPaint(Color.white);
@@ -48,22 +50,8 @@ public class Chart extends JPanel {
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 	}
 
-	public void addLine(Line line){
-		this.plot.setDataset(
-				line.getIndex(),datas[line.getIndex()]
-				);
-		this.plot.setRenderer(line.getIndex(), new StandardXYItemRenderer());
-	}
-	
 	public void add(Line line, float price, int tick ){
 		System.out.println("ajout");
-		this.plot.setDataset(line.getIndex(),datas[line.getIndex()]);
-		if(series[line.getIndex()] == null)
-		{
-			addLine(line);
-			series[line.getIndex()] = new Series();
-		}
-		series[line.getIndex()].
-		chart.fireChartChanged();
+		datas[line.getIndex()].addValue(price, line.getName(), String.valueOf(tick));
 	}
 }
