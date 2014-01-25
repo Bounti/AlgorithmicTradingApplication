@@ -29,11 +29,21 @@ public class NetworkService{
 	}
 	
 	public void sendSellOrder(){
-		
+		try {
+			bookingNetService.sendSellOrder();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void sendBuyOrder(){
-		
+		try {
+			bookingNetService.sendBuyOrder();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void refreshValue(int tick,float price) {

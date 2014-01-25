@@ -21,6 +21,7 @@ import org.jfree.chart.ChartUtilities;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
@@ -36,6 +37,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
@@ -44,31 +48,25 @@ public class MainFrame extends JFrame{
 	private FlowLayout layout;
 	private JTable table;
 	private PriceTable priceTable;
-
-	private DefaultCategoryDataset[] lines;
-
+	private Chart chart;
+	
 	public MainFrame(){
 		super();
 
-		lines = new DefaultCategoryDataset[9];
-		ChartPanel chartPanel;
-
-		for(int i = 9; i<lines.length;i++)
-		{
-			JFreeChart lineChartObject = ChartFactory.createLineChart("Stocks","Time (second)","Price ($)",lines[i],PlotOrientation.VERTICAL,true,true,false);
-			lineChartObject.setBackgroundPaint(Color.yellow);
-			chartPanel = new ChartPanel(lineChartObject);
-			setContentPane(chartPanel);
-		}
-
+		chart = new Chart();
+		layout = new FlowLayout();
 		priceTable = new PriceTable();
 		table = new JTable(priceTable);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-
 		super.setSize(600, 500);
+		super.setPreferredSize(new Dimension(600,500));
 		super.setVisible(true);
 		super.setLayout(layout);
+		super.add(table);
+		super.add(new Chart());
+
+		super.pack();
 		super.setVisible(true);
 	}
 
@@ -77,6 +75,15 @@ public class MainFrame extends JFrame{
 	}
 
 	public void add(Line line, float price, int tick ){
-		lines[line.getIndex()].addValue(price,line.getName(),String.valueOf(tick));
+		chart.add(line,price,tick);
+		/*
+		 * 		ChartPanel chartPanel;
+		JFreeChart chart = ChartFactory.createLineChart("Stocks","Time (second)","Price ($)",(CategoryDataset) datasets,PlotOrientation.VERTICAL,true,true,false);
+		chart.setBackgroundPaint(Color.yellow);
+		chartPanel = new ChartPanel(chart);
+		super.add(chartPanel);
+
+		 */
+		//lines[line.getIndex()].add(price,tick);
 	}
 }
