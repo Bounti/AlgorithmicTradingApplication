@@ -85,8 +85,8 @@ public class Action extends Thread {
 	
 	public void run(){
 		Stock s;
-		float[] average_old =new float[8];
-		float[] average_current =null;
+		float[] average_old =null;
+		float[] average_current =new float[8];
 		float sma_ecart_old, sma_ecart_current, tma_ecart_current, tma_ecart_old,lwma_ecart_old, lwma_ecart_current;
 		SMA sma = new SMA(this);
 		TMA tma = new TMA(this);
