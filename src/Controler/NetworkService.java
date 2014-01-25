@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class NetworkService extends Thread{
+import View.MainFrame;
+
+public class NetworkService{
 
 	private static NetworkService instance = null;
 	
@@ -13,6 +15,8 @@ public class NetworkService extends Thread{
 	private PriceNetworkService priceNetService;
 	private BookingNetworkService bookingNetService;
 	
+	private MainFrame mf = new MainFrame();
+	
 	public static NetworkService getInstance() throws UnknownHostException, IOException{
 		if(instance == null)
 			instance = new NetworkService();
@@ -20,12 +24,12 @@ public class NetworkService extends Thread{
 	}
 	
 	private NetworkService() throws UnknownHostException, IOException{
-		priceNetService = new PriceNetworkService();
+		priceNetService = new PriceNetworkService(this);
 		bookingNetService = new BookingNetworkService();
 	}
 	
-	private void initTransaction() throws IOException{
-		priceNetService.initTransaction();
+	public void initTransaction() throws IOException{
+		priceNetService.start();
 	}
 	
 	public void sendSellOrder(){
@@ -36,16 +40,7 @@ public class NetworkService extends Thread{
 		
 	}
 
-	public void run() {
-		try {
-			initTransaction();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		while(listening)
-		{
-			System.out.println("");
-		}
+	public void refreshValue(String sValue) {
+		mf.addTableValue("0",sValue);
 	}
 }
