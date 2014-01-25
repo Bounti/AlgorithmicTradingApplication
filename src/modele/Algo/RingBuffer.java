@@ -10,7 +10,7 @@ public class RingBuffer{
 		this.tab = new float[i];
 	}
 	
-	public float add(int i){
+	public float add(float i){
 		float old;
 		if(indice==0)
 			old=i;
