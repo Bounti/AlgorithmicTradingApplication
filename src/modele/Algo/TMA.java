@@ -3,10 +3,10 @@ package modele.Algo;
 import org.apache.commons.collections4.queue.CircularFifoQueue;
 
 public class TMA {
-	private CircularFifoQueue<Integer> fast;
-	private CircularFifoQueue<Integer> slow;
-	public static int slowAverage;
-	public static int fastAverage;
+	private CircularFifoQueue<Float> fast;
+	private CircularFifoQueue<Float> slow;
+	public static float slowAverage;
+	public static float fastAverage;
 	
 	public TMA() {
 		this.fast = new CircularFifoQueue<>(5);
@@ -16,9 +16,9 @@ public class TMA {
 
 	}
 	
-	public void calculSlow(int SMASlow){
+	public void calculSlow(float SMASlow){
 		if(slow.size()<=20){
-			for(int i :slow){
+			for(float i :slow){
 				slowAverage+=i;
 			}
 			slowAverage=slowAverage/slow.size();
@@ -30,9 +30,9 @@ public class TMA {
 		slow.add(SMASlow);
 	}
 	
-	public void calculFast(int SMAFast){
+	public void calculFast(float SMAFast){
 		if(slow.size()<=5){
-			for(int i :slow){
+			for(float i :slow){
 				fastAverage+=i;
 			}
 			fastAverage=fastAverage/slow.size();

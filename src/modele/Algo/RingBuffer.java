@@ -2,16 +2,16 @@ package modele.Algo;
 
 
 public class RingBuffer{
-	private int[] tab ;
+	private float[] tab ;
 
 	private int indice;
 	
 	public RingBuffer(int i) {
-		this.tab = new int[i];
+		this.tab = new float[i];
 	}
 	
-	public int add(int i){
-		int old;
+	public float add(int i){
+		float old;
 		if(indice==0)
 			old=i;
 		else
@@ -22,7 +22,7 @@ public class RingBuffer{
 	}
 	
 	
-	public int get(int i){
+	public float get(int i){
 		return tab[i];
 	}
 	
@@ -34,7 +34,7 @@ public class RingBuffer{
 		return indice;
 	}
 
-	public int[] getTab() {
+	public float[] getTab() {
 		return tab;
 	}
 

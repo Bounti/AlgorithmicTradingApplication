@@ -3,8 +3,8 @@ package modele.Algo;
 public class Action {
 	private RingBuffer fast ;
 	private RingBuffer slow;
-	private int current;
-	private int oldest;
+	private float current;
+	private float oldest;
 	
 	public Action() {
 		this.fast =new RingBuffer(5);
@@ -13,16 +13,17 @@ public class Action {
 	}
 	
 	public void add(int i){
+		current=i;
 		this.oldest=this.fast.add(i);
 		this.slow.add(i);
 	}
 	
 	
-	public int getCurrent() {
+	public float getCurrent() {
 		return current;
 	}
 
-	public int getOldest() {
+	public float getOldest() {
 		return oldest;
 	}
 

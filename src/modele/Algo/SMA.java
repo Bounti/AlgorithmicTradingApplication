@@ -2,15 +2,15 @@ package modele.Algo;
 
 public class SMA {
 	public static Action ring;
-	public static int slowAverage;
-	public static int fastAverage;
+	public static float slowAverage;
+	public static float fastAverage;
 	public SMA(Action r){
 		ring=r;
 		slowAverage=0;
 		fastAverage=0;
 	}
 	
-	private static int calculSlow(){
+	private static float calculSlow(){
 		if(ring.slowSize()<=20){
 			RingBuffer tab = ring.getSlow();
 			for(int i=0; i<ring.slowSize();i++){
@@ -24,7 +24,7 @@ public class SMA {
 		return slowAverage;
 	}
 	
-	private static int calculFast(){
+	private static float calculFast(){
 		if(ring.fastSize()<=5){
 			RingBuffer tab =ring.getFast();
 			for(int i=0; i<ring.fastSize();i++){

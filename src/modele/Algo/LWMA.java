@@ -2,8 +2,8 @@ package modele.Algo;
 
 public class LWMA {
 	public static Action ring;
-	public static int slowAverage;
-	public static int fastAverage;
+	public static float slowAverage;
+	public static float fastAverage;
 	public LWMA(Action r){
 		ring=r;
 		slowAverage=0;
