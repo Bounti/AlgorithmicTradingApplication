@@ -1,6 +1,5 @@
 package Controler;
 
-public class BookingNetworkService {
+public class BookingNetworkService{
 
-	
 }
