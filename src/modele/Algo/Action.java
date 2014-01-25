@@ -89,55 +89,63 @@ public class Action extends Thread {
 		LWMA lwma = new LWMA(this);
 		
 		while(true){
-			synchronized(this.queue){
-				s= this.queue.pollFirst();
-			}
-			this.update(s);
-			sma.calcul();
-			tma.calcul(sma.getFastAverage(), sma.getSlowAverage());
-			lwma.calcul();
-			average_current[0]=sma.getSlowAverage();
-			average_current[1]=sma.getFastAverage();
-			average_current[2]=tma.getSlowAverage();
-			average_current[3]=tma.getFastAverage();
-			average_current[2]=lwma.getSlowAverage();
-			average_current[3]=lwma.getFastAverage();
-			if(average_old==null){
-				average_old=new float[8];
-				
-			}
-			else{
-				sma_ecart_old=average_old[1]-average_old[0];
-				sma_ecart_current=average_current[1]-average_current[0];
-				tma_ecart_old=average_old[3]-average_old[2];
-				tma_ecart_current=average_current[3]-average_current[2];
-				lwma_ecart_old=average_old[5]-average_old[4];
-				lwma_ecart_current=average_current[5]-average_current[4];
-				
-				frame.add(Line.SMA20,average_current[0],s.getTick());
-				frame.add(Line.SMA5,average_current[1],s.getTick());
-				frame.add(Line.TMA20,average_current[2],s.getTick());
-				frame.add(Line.TMA5,average_current[3],s.getTick());
-				frame.add(Line.LWMA20,average_current[4],s.getTick());
-				frame.add(Line.LWMA5,average_current[5],s.getTick());
-				
-				if((sma_ecart_old < 0 && sma_ecart_current > 0 ) ){
-					networkService.sendBuyOrder();
+			while(!this.queue.isEmpty()){
+				synchronized(this.queue){
+					s= this.queue.pollFirst();
 				}
-				else if((tma_ecart_old < 0 && tma_ecart_current > 0 )){
-					networkService.sendBuyOrder();
+				this.update(s);
+				sma.calcul();
+				tma.calcul(sma.getFastAverage(), sma.getSlowAverage());
+				lwma.calcul();
+				average_current[0]=sma.getSlowAverage();
+				average_current[1]=sma.getFastAverage();
+				average_current[2]=tma.getSlowAverage();
+				average_current[3]=tma.getFastAverage();
+				average_current[4]=lwma.getSlowAverage();
+				average_current[5]=lwma.getFastAverage();
+				if(average_old==null){
+					average_old=new float[8];
+					
 				}
-				else if((lwma_ecart_old < 0 && lwma_ecart_current > 0 )){
-					networkService.sendBuyOrder();
-				}
-				else if((sma_ecart_old > 0 && sma_ecart_current < 0 )){
-					networkService.sendSellOrder();
-				}
-				else if(tma_ecart_old > 0 && tma_ecart_current < 0 ){
-					networkService.sendSellOrder();
-				}
-				else if(lwma_ecart_old > 0 && lwma_ecart_current < 0 ){
-					networkService.sendSellOrder();
+				else{
+					sma_ecart_old=average_old[1]-average_old[0];
+					sma_ecart_current=average_current[1]-average_current[0];
+					tma_ecart_old=average_old[3]-average_old[2];
+					tma_ecart_current=average_current[3]-average_current[2];
+					lwma_ecart_old=average_old[5]-average_old[4];
+					lwma_ecart_current=average_current[5]-average_current[4];
+					
+					frame.add(Line.SMA20,average_current[0],s.getTick());
+					frame.add(Line.SMA5,average_current[1],s.getTick());
+					frame.add(Line.TMA20,average_current[2],s.getTick());
+					frame.add(Line.TMA5,average_current[3],s.getTick());
+					frame.add(Line.LWMA20,average_current[4],s.getTick());
+					frame.add(Line.LWMA5,average_current[5],s.getTick());
+					
+					if((sma_ecart_old < 0 && sma_ecart_current > 0 ) ){
+						networkService.sendBuyOrder();
+					}
+					else if((tma_ecart_old < 0 && tma_ecart_current > 0 )){
+						networkService.sendBuyOrder();
+					}
+					else if((lwma_ecart_old < 0 && lwma_ecart_current > 0 )){
+						networkService.sendBuyOrder();
+					}
+					else if((sma_ecart_old > 0 && sma_ecart_current < 0 )){
+						networkService.sendSellOrder();
+					}
+					else if(tma_ecart_old > 0 && tma_ecart_current < 0 ){
+						networkService.sendSellOrder();
+					}
+					else if(lwma_ecart_old > 0 && lwma_ecart_current < 0 ){
+						networkService.sendSellOrder();
+					}
+					average_old[0]=average_current[0];
+					average_old[1]=average_current[1];
+					average_old[2]=average_current[2];
+					average_old[3]=average_current[3];
+					average_old[4]=average_current[4];
+					average_old[5]=average_current[5];
 				}
 			}
 		}
