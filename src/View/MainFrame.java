@@ -20,14 +20,14 @@ public class MainFrame extends JFrame{
 		table = new JTable(priceTable);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		super.getContentPane().add(scrollPane, BorderLayout.CENTER);
-		super.setSize(300, 200);
+		super.getContentPane().add(scrollPane);
+		super.setSize(600, 500);
 		super.setVisible(true);
 		super.setLayout(layout);
 		super.setVisible(true);
 	}
 	
-	public void addTableValue(String price, String time){
-		this.priceTable.addRow(new Object[]{price,time});
+	public void addTableValue(String price, int tick){
+		this.priceTable.addRow(new Object[]{price,tick});
 	}
 }
