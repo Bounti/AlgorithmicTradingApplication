@@ -9,7 +9,7 @@ import javax.swing.table.TableModel;
 public class PriceTable extends AbstractTableModel{
 
 	private List<Object[]> rows;
-	private Object columnNames[] = { "Time", "Price"};
+	private Object columnNames[] = { "Trade Price", "Server Price"};
 
 	public PriceTable() {
 		rows = new ArrayList<>();

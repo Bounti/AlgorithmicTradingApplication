@@ -45,8 +45,8 @@ public class MainFrame extends JFrame{
 
 		JScrollPane scrollPane = new JScrollPane(table);
 
-		super.add(table);
 		super.add(onglets);
+		super.add(table);
 
 		super.setLayout(layout);
 		super.setSize(800, 600);
@@ -55,8 +55,8 @@ public class MainFrame extends JFrame{
 		super.setVisible(true);
 	}
 
-	public void addTableValue(String price, int tick){
-		this.priceTable.addRow(new Object[]{price,tick});
+	public void addTableValue(float tradePrice, float serverPrice){
+		this.priceTable.addRow(new Object[]{tradePrice,serverPrice});
 	}
 
 	public void add(Line line, float price, int tick ){
