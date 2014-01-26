@@ -49,7 +49,7 @@ public class PriceNetworkService extends Thread{
 				in.read(b);
 				if( b[0] == '|')
 				{
-					//System.out.println("[INFO]"+sValue);
+					System.out.println("[INFO]"+sValue);
 					netService.refreshValue(tick,Float.valueOf(sValue));
 					tick++;
 					sValue = "";
