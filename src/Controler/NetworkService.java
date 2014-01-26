@@ -1,6 +1,8 @@
 package Controler;
 
 import modele.Algo.Action;
+import modele.Algo.Stock;
+
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -32,7 +34,6 @@ public class NetworkService{
 		try {
 			bookingNetService.sendSellOrder();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -41,12 +42,15 @@ public class NetworkService{
 		try {
 			bookingNetService.sendBuyOrder();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public void refreshValue(int tick,float price) {
 		action.add(tick,price);
+	}
+
+	public Stock getLastStock() {
+		return priceNetService.getLastStock();
 	}
 }

@@ -18,15 +18,15 @@ public class TMA {
 	}
 	
 	private void calculSlow(float SMASlow){
+		slow.add(SMASlow);
 		if(slow.size()<20){
-			slow.add(SMASlow);
+			
 			for(float i :slow){
 				slowAverage+=i;
 			}
 			slowAverage=slowAverage/slow.size();
 		}
 		else{
-			slow.add(SMASlow);
 			for(float i :slow){
 				slowAverage+=i;
 			}
@@ -38,16 +38,16 @@ public class TMA {
 	}
 	
 	private void calculFast(float SMAFast){
-		
+		fast.add(SMAFast);
 		if(fast.size()<5){
-			fast.add(SMAFast);
+			
+			
 			for(float i :fast){
 				fastAverage+=i;
 			}
 			fastAverage=fastAverage/fast.size();
 		}
 		else{
-			fast.add(SMAFast);
 			for(float i :fast){
 				fastAverage+=i;
 			}

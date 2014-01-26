@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,7 +26,10 @@ public class MainFrame extends JFrame{
 	private JFreeChart[] charts = new JFreeChart[9];
 	public MainFrame(){
 		super();
-		layout = new FlowLayout();
+
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super.setTitle("Algorithmic Trading (EOE)");
+		
 		ChartPanel chartPanel;
 		JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
 		
@@ -33,7 +37,7 @@ public class MainFrame extends JFrame{
 		{
 			JPanel onglet = new JPanel();
 			lines[i] = new DefaultCategoryDataset();
-			charts[i] = ChartFactory.createLineChart("Stocks","Time (second)","Price ($)",lines[i],PlotOrientation.VERTICAL,true,true,false);
+			charts[i] = ChartFactory.createLineChart("Algorithmic Trading (EOE)","Time (second)","Price ($)",lines[i],PlotOrientation.VERTICAL,true,true,false);
 			charts[i].setBackgroundPaint(Color.gray);
 			chartPanel = new ChartPanel(charts[i]);
 			onglet.add(chartPanel);
@@ -45,13 +49,11 @@ public class MainFrame extends JFrame{
 
 		JScrollPane scrollPane = new JScrollPane(table);
 
-		super.add(onglets);
-		super.add(table);
+		this.getContentPane().add(onglets,BorderLayout.WEST);
+		this.getContentPane().add(scrollPane,BorderLayout.EAST);
 
-		super.setLayout(layout);
 		super.setSize(800, 600);
-		super.setVisible(true);
-		super.setLayout(layout);
+		super.pack();
 		super.setVisible(true);
 	}
 
@@ -61,5 +63,6 @@ public class MainFrame extends JFrame{
 
 	public void add(Line line, float price, int tick ){
 		lines[line.getIndex()].addValue(price,line.getName(),String.valueOf(tick));
+		charts[line.getIndex()].fireChartChanged();
 	}
 }

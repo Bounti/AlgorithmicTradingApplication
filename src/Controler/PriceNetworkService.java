@@ -8,6 +8,9 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import modele.Algo.Action;
+import modele.Algo.Stock;
+
 public class PriceNetworkService extends Thread{
 	
 	private static int tick = 0;
@@ -15,7 +18,8 @@ public class PriceNetworkService extends Thread{
 	private int port = 3000;
 	private String address = "localhost";
 	private boolean listening = true;
-	
+	private Stock lastStock = new Stock(0,0);
+
 	private DataOutputStream out;
 	private DataInputStream in;
 
@@ -49,10 +53,15 @@ public class PriceNetworkService extends Thread{
 				in.read(b);
 				if( b[0] == '|')
 				{
-					System.out.println("[INFO]"+sValue);
+					//System.out.println("[INFO]"+sValue);
 					netService.refreshValue(tick,Float.valueOf(sValue));
+					lastStock = new Stock(tick,Float.valueOf(sValue));
 					tick++;
 					sValue = "";
+				}
+				else if ( b[0] == 'C')
+				{
+					Action.close();
 				}
 				else
 				{
@@ -62,5 +71,9 @@ public class PriceNetworkService extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Stock getLastStock() {
+		return lastStock;
 	}
 }

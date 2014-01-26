@@ -31,7 +31,7 @@ public class LWMA {
 	
 	private void  calculFast(){
 		int i = 1,s=0;
-		if(ring.slowSize()<5){
+		if(ring.fastSize()<5){
 			for(float f : ring.getFast()){
 				fastAverage+=f*(i++);
 				s+=i;

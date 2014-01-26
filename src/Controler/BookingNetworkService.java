@@ -20,7 +20,7 @@ public class BookingNetworkService extends Thread{
 
 	public void sendSellOrder() throws IOException {
 		System.out.println("=========SSS=============");
-		socket = new Socket(this.address,this.port);
+		/*socket = new Socket(this.address,this.port);
 
 		out = new DataOutputStream(socket.getOutputStream());
 		in = new DataInputStream(socket.getInputStream());
@@ -29,13 +29,13 @@ public class BookingNetworkService extends Thread{
 		String str = in.readLine();
 
 		System.out.println(str);
-		socket.close();
+		socket.close();*/
 	}
 
 	public void sendBuyOrder() throws IOException {
 		System.out.println("=====BBB=================");
 
-		socket = new Socket(this.address,this.port);
+		/*socket = new Socket(this.address,this.port);
 
 		out = new DataOutputStream(socket.getOutputStream());
 		in = new DataInputStream(socket.getInputStream());
@@ -45,6 +45,6 @@ public class BookingNetworkService extends Thread{
 
 		System.out.println(str);
 
-		socket.close();
+		socket.close();*/
 	}
 }
